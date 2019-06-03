@@ -1,0 +1,233 @@
+<html>
+<head>
+<title>Chuyển đổi độ Decimal degrees và độ phút giây</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="description" content="dothanhlong.org | Chuyển đổi độ Decimal degrees và độ phút giây">
+	<meta name="author" content="soiqualang_chentreu">
+	<meta name="keywords" content="Do Thanh Long GIS, Decimal degrees,soiqualang_chentreu,gis,geo,độ phút giây"/>
+	<meta name="titles" content="Đỗ Thành Long Website">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+	<meta http-equiv="Pragma" content="no-cache">
+<script type="text/javascript">
+<!-- hide this script tag's contents from old browsers
+
+function ClearForm(form){
+form.degrees.value = "";
+form.minutes.value = "";
+form.seconds.value = "";
+}
+
+function checkform(form) {
+if (form.degrees.value==null ||form.degrees.value.length==0 ||
+    form.minutes.value==null ||form.minutes.value.length==0 ||
+    form.seconds.value==null ||form.seconds.value.length==0 ||
+    form.degreesdecin.value==null || form.degreesdecin.value==0 ){
+alert("\nPlease enter figures in all three boxes for degrees, minutes and seconds first"); return false;
+ClearForm(form);
+return false;
+}
+return true;
+}
+
+function azimuth(deg,min,sec) {
+if (deg < 0)
+   {
+   azi= -1.0 * deg + 1.0 * min/60.0 + 1.0 * sec/3600.0;
+   return -1.0 * azi;
+   }
+else
+   {
+   azi=1.0 * deg + 1.0 * min/60.0 + 1.0 * sec/3600.0;
+   return azi;
+   }
+}
+
+function round(number,n) {
+return Math.round(number*Math.pow(10,n))/Math.pow(10,n);
+}
+
+function computeform(form) {
+if (checkform(form)) {
+
+fazimuth  = azimuth (form.degrees.value,form.minutes.value,form.seconds.value);
+
+form.fazimuth.value       =round(fazimuth,4);
+form.fazimuth5.value      =round(fazimuth,5);
+form.result6.value        =round(fazimuth,6);
+
+// reverse calculation: results are resultdeg, resultmin, resultsec and resultmindec
+
+// if input value is negative, display West or West or South, and calculate normally, using positive number
+var tempinput = form.degreesdecin.value;
+var hemisphere = "";  // display box to show blank for east or north, west or south for values as fas as -90, and west for values beyond -90
+if (tempinput < 0)
+   {
+   hemisphere ="West";
+   }
+if ((tempinput < 0) && (tempinput > -90))
+   {
+   hemisphere ="West or South";
+   }
+if (tempinput < 0)
+   {
+   tempinput = -1.0 * tempinput;
+   }
+   
+var integerdeg = Math.floor(tempinput,0);
+form.rd1.value = 1.0 * integerdeg;
+form.rd2.value = 1.0 * integerdeg;
+
+var resultminutes = 60.0 * (tempinput - integerdeg);
+
+var integermin  = 1.0 * Math.floor(resultminutes);
+
+form.rm1.value = 1.0 * integermin;
+
+var resultseconds = round (60.0 * (resultminutes - integermin),3);
+
+form.rs.value = resultseconds;
+form.rm2.value = round ( resultminutes, 6);
+form.hemibox1.value = hemisphere;
+form.hemibox2.value = hemisphere;
+
+}
+return;
+}
+// -- done hiding from old browsers -->
+
+</script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-45248164-11"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-45248164-11');
+</script>
+
+</head>
+<body>
+<!--facebook comment-->
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/vi_VN/all.js#xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<!--end-->
+<h1>Chuyển đổi giữa độ thập phân (Decimal degrees) và độ phút giây</h1>
+<a href="https://dothanhlong.org/" target="_blank">Đỗ Thành Long</a> | Chuyển đổi giữa độ thập phân (Decimal degrees) và độ phút giây
+<form action="">
+       <center>
+       <table border="1" style="border-collapse: collapse" cellpadding="2" cellspacing="0" bgcolor="#00FFFF">
+          <tbody><tr>
+            <td>Độ </td>
+            <td>
+            <p align="left">Phút </p></td>
+            <td>Giây </td>
+          </tr>
+          <tr>
+            <td>
+            <input type="text" size="10" value="10" name="degrees" onfocus="this.form.degrees.value=''"></td>
+            <td>
+            <input type="text" size="10" value="46" name="minutes" onfocus="this.form.minutes.value=''"></td>
+            <td>
+            <input type="text" size="10" value="46.43" name="seconds" onfocus="this.form.seconds.value=''"></td>
+          </tr>
+		  10°46'46.43"
+       </tbody></table>
+       </center>
+      
+       <p align="center">
+       <input type="button" value="Tính toán" onclick="computeform(this.form)"><input type="reset" value="Giá trị làm mẫu" onclick="ClearForm(this.form)">      </p>
+       <center>
+       <table border="1" style="border-collapse: collapse" cellpadding="2" cellspacing="0">
+          <tbody><tr>
+            <td height="1">Decimal degrees<br>
+            4 số thập phân&nbsp;&nbsp; </td>
+            <td height="1">Decimal degrees<br>
+            5 số thập phân&nbsp; </td>
+            <td height="1">Decimal degrees<br>
+            6 số thập phân</td>
+          </tr>
+          <tr>
+            <td height="25"><input type="text" size="8" name="fazimuth"></td>
+            <td height="25"><input type="text" size="10" name="fazimuth5"></td>
+            <td height="25"><input type="text" size="10" name="result6"></td>
+          </tr>
+       </tbody></table>
+       </center>
+       
+     
+  <p>Cách tính: <b>Decimal degrees (Độ thập phân) = Số độ + (số phút/60) + (số giây/3600)</b></p>
+  <hr>
+  <p align="center"><b><font size="3">Đảo ngược lại:</font>&nbsp; Nhập tọa độ độ thập phân tính ra độ/phút/giây.</b></p>
+      
+        <center>
+        <table border="1" style="border-collapse: collapse" cellpadding="2" cellspacing="0" bgcolor="#00FFFF">
+          <tbody><tr>
+            <td>Decimal Degrees </td>
+          </tr>
+          <tr>
+            <td>
+            <input type="text" size="10" value="117.497361" name="degreesdecin" onfocus="this.form.degreesdecin.value=''"></td>
+          </tr>
+        </tbody></table>
+        </center>
+      
+      <p align="center">
+      <input type="button" value="Tính toán" onclick="computeform(this.form)"><input type="reset" value="Giá trị làm mẫu" onclick="ClearForm(this.form)">
+      </p>
+      
+        <center>
+        <table border="1" style="border-collapse: collapse" cellpadding="2" cellspacing="0">
+          <tbody><tr>
+            <td>&nbsp;</td>
+            <td>Độ</td>
+            <td>Phút</td>
+            <td>Giây</td>
+          </tr>
+          <tr>
+            <td><input type="text" size="16" name="hemibox1"></td>
+            <td><input type="text" size="10" name="rd1"></td>
+            <td><input type="text" size="10" name="rm1"></td>
+            <td><input type="text" size="10" name="rs"></td>
+          </tr>
+          <tr>
+            <td><input type="text" size="16" name="hemibox2"></td>
+            <td><input type="text" size="10" name="rd2"></td>
+            <td><input type="text" size="10" name="rm2"></td>
+            <td>&nbsp;</td>
+          </tr>
+          
+        </tbody></table>
+        </center>
+     
+    
+</form>
+<hr>
+<h2>Bình luận Chuyển đổi giữa độ thập phân (Decimal degrees) và độ phút giây</h2>
+<!--like-->
+<div class="fb-like" data-href="https://dothanhlong.org/lonlatconvert/" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
+<!--end-->
+<!--share-->
+<div class="fb-share-button" data-href="https://dothanhlong.org/lonlatconvert/" data-type="button_count"></div>
+<!--end-->
+<br>
+<!--comment-->
+<div class="fb-comments" data-href="https://dothanhlong.org/lonlatconvert/" data-width="600" data-numposts="5" data-colorscheme="light"></div>
+<!--endcomment-->
+<!--follow-->
+<div class="fb-follow" data-href="https://dothanhlong.org/lonlatconvert/" data-width="400" data-height="100" data-colorscheme="light" data-layout="standard" data-show-faces="true"></div>
+<!--endfollow-->
+<hr>
+Copyright © soiqualang_chentreu<br>
+<a href="https://dothanhlong.org/">Đỗ Thành Long</a>
+<br>
+<a href="https://www.facebook.com/soiqualang.chentreu">https://www.facebook.com/soiqualang.chentreu</a>
+</body>
+</html>
