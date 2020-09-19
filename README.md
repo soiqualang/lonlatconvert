@@ -1,4 +1,4 @@
 # lonlatconvert
 lonlatconvert
 
-https://dothanhlong.org/lonlatconvert/
+http://apps.dothanhlong.org/lonlatconvert/
